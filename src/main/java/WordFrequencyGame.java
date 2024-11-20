@@ -42,8 +42,4 @@ public class WordFrequencyGame {
                 .collect(Collectors.joining(LINE_BREAK));
     }
 
-    private Map<String, List<WordFrequency>> groupWords(List<WordFrequency> wordFrequencyList) {
-        return wordFrequencyList.stream()
-                .collect(Collectors.groupingBy(WordFrequency::getWord, Collectors.toCollection(ArrayList::new)));
-    }
 }
