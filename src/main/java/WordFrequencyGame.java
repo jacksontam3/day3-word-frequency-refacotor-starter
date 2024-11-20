@@ -10,19 +10,19 @@ public class WordFrequencyGame {
 
     public String getWordFrequency(String inputStr) {
 
-            try {
+        try {
 
-                if (inputStr.split(SPACE_REGEX).length == 1) {
-                    return inputStr + " 1";
-                }
-
-                List<WordFrequency> wordFrequencyList = calculateAndAggregateWordFrequencies(inputStr);
-
-
-                return formatWordFrequencies(wordFrequencyList);
-            } catch (Exception e) {
-                return CALCULATE_ERROR + e.getMessage();
+            if (inputStr.split(SPACE_REGEX).length == 1) {
+                return inputStr + " 1";
             }
+
+            List<WordFrequency> wordFrequencyList = calculateAndAggregateWordFrequencies(inputStr);
+
+
+            return formatWordFrequencies(wordFrequencyList);
+        } catch (Exception e) {
+            return CALCULATE_ERROR + e.getMessage();
+        }
 
     }
 
