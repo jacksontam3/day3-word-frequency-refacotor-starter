@@ -16,9 +16,7 @@ public class WordFrequencyGame {
                     return inputStr + " 1";
                 }
 
-                List<WordFrequency> wordFrequencyList = calculateWordFrequencies(inputStr);
-
-                wordFrequencyList = aggregateWordFrequencies(wordFrequencyList);
+                List<WordFrequency> wordFrequencyList = calculateAndAggregateWordFrequencies(inputStr);
 
 
                 return formatWordFrequencies(wordFrequencyList);
@@ -28,10 +26,13 @@ public class WordFrequencyGame {
 
     }
 
-    private List<WordFrequency> aggregateWordFrequencies(List<WordFrequency> wordFrequencyList) {
-        Map<String, List<WordFrequency>> wordToWordFrequency = groupWords(wordFrequencyList);
+    private List<WordFrequency> calculateAndAggregateWordFrequencies(String inputStr) {
+        Map<String, Long> wordCountMap = Arrays.stream(inputStr.split(SPACE_REGEX))
+                .collect(Collectors.groupingBy(word -> word, Collectors.counting()));
 
-        return wordToWordFrequency.entrySet().stream().map(entry -> new WordFrequency(entry.getKey(), entry.getValue().size())).toList();
+        return wordCountMap.entrySet().stream()
+                .map(entry -> new WordFrequency(entry.getKey(), entry.getValue().intValue()))
+                .toList();
     }
 
     private String formatWordFrequencies(List<WordFrequency> wordFrequencyList) {
@@ -39,12 +40,6 @@ public class WordFrequencyGame {
                 .sorted(Comparator.comparingInt(WordFrequency::getWordCount).reversed())
                 .map(w -> w.getWord() + SPACE + w.getWordCount())
                 .collect(Collectors.joining(LINE_BREAK));
-    }
-
-    private List<WordFrequency> calculateWordFrequencies(String inputStr) {
-        return Arrays.stream(inputStr.split(SPACE_REGEX))
-                .map(word -> new WordFrequency(word, 1))
-                .toList();
     }
 
     private Map<String, List<WordFrequency>> groupWords(List<WordFrequency> wordFrequencyList) {
