@@ -21,7 +21,7 @@ public class WordFrequencyGame {
                 wordFrequencyList = aggregateWordFrequencies(wordFrequencyList);
 
 
-                return getString(wordFrequencyList);
+                return formatWordFrequencies(wordFrequencyList);
             } catch (Exception e) {
                 return CALCULATE_ERROR + e.getMessage();
             }
@@ -34,7 +34,7 @@ public class WordFrequencyGame {
         return wordToWordFrequency.entrySet().stream().map(entry -> new WordFrequency(entry.getKey(), entry.getValue().size())).toList();
     }
 
-    private static String getString(List<WordFrequency> wordFrequencyList) {
+    private static String formatWordFrequencies(List<WordFrequency> wordFrequencyList) {
         return wordFrequencyList.stream()
                 .sorted(Comparator.comparingInt(WordFrequency::getWordCount).reversed())
                 .map(w -> w.getWord() + SPACE + w.getWordCount())
