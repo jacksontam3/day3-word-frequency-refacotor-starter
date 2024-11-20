@@ -29,13 +29,7 @@ public class WordFrequencyGame {
     private List<WordFrequency> getWordFrequencyList(List<WordFrequency> wordFrequencyList) {
         Map<String, List<WordFrequency>> wordToWordFrequency = getListMap(wordFrequencyList);
 
-        List<WordFrequency> list = new ArrayList<>();
-        for (Map.Entry<String, List<WordFrequency>> entry : wordToWordFrequency.entrySet()) {
-            WordFrequency wordFrequency = new WordFrequency(entry.getKey(), entry.getValue().size());
-            list.add(wordFrequency);
-        }
-        wordFrequencyList = list;
-        return wordFrequencyList;
+        return wordToWordFrequency.entrySet().stream().map(entry -> new WordFrequency(entry.getKey(), entry.getValue().size())).toList();
     }
 
     private static String getString(List<WordFrequency> wordFrequencyList) {
