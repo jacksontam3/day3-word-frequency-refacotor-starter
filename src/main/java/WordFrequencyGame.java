@@ -35,10 +35,10 @@ public class WordFrequencyGame {
     }
 
     private static String getString(List<WordFrequency> wordFrequencyList) {
-        wordFrequencyList.sort((word1, word2) -> word2.getWordCount() - word1.getWordCount());
-        StringJoiner joiner = new StringJoiner(LINE_BREAK);
-        wordFrequencyList.forEach(wordFrequency -> joiner.add(wordFrequency.getWord() + SPACE + wordFrequency.getWordCount()));
-        return joiner.toString();
+        return wordFrequencyList.stream()
+                .sorted(Comparator.comparingInt(WordFrequency::getWordCount).reversed())
+                .map(w -> w.getWord() + SPACE + w.getWordCount())
+                .collect(Collectors.joining(LINE_BREAK));
     }
 
     private List<WordFrequency> getWordFrequencies(String inputStr) {
