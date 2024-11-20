@@ -6,6 +6,8 @@ public class WordFrequencyGame {
 
     public static final String Space = "\\s+";
     public static final String LINE_BREAK = "\n";
+    public static final String CALCULATE_ERROR = "Calculate Error";
+    public static final String SPACE = " ";
 
     public String getWordFrequency(String inputStr) {
 
@@ -28,7 +30,7 @@ public class WordFrequencyGame {
 
                 return getString(wordFrequencyList);
             } catch (Exception e) {
-                return "Calculate Error";
+                return CALCULATE_ERROR + e.getMessage();
             }
         }
     }
@@ -36,7 +38,7 @@ public class WordFrequencyGame {
     private static String getString(List<WordFrequency> wordFrequencyList) {
         wordFrequencyList.sort((word1, word2) -> word2.getWordCount() - word1.getWordCount());
         StringJoiner joiner = new StringJoiner(LINE_BREAK);
-        wordFrequencyList.forEach(wordFrequency -> joiner.add(wordFrequency.getWord() + " " + wordFrequency.getWordCount()));
+        wordFrequencyList.forEach(wordFrequency -> joiner.add(wordFrequency.getWord() + SPACE + wordFrequency.getWordCount()));
         return joiner.toString();
     }
 
