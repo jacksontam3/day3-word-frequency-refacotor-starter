@@ -10,10 +10,12 @@ public class WordFrequencyGame {
 
     public String getWordFrequency(String inputStr) {
 
-        if (inputStr.split(SPACE_REGEX).length == 1) {
-            return inputStr + " 1";
-        } else {
             try {
+
+                if (inputStr.split(SPACE_REGEX).length == 1) {
+                    return inputStr + " 1";
+                }
+
                 List<WordFrequency> wordFrequencyList = getWordFrequencies(inputStr);
 
                 wordFrequencyList = getWordFrequencyList(wordFrequencyList);
@@ -23,7 +25,7 @@ public class WordFrequencyGame {
             } catch (Exception e) {
                 return CALCULATE_ERROR + e.getMessage();
             }
-        }
+
     }
 
     private List<WordFrequency> getWordFrequencyList(List<WordFrequency> wordFrequencyList) {
