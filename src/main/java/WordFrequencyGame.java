@@ -1,4 +1,6 @@
+import java.nio.file.LinkPermission;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class WordFrequencyGame {
 
@@ -36,17 +38,7 @@ public class WordFrequencyGame {
     }
 
     private Map<String, List<WordFrequency>> getListMap(List<WordFrequency> wordFrequencyList) {
-        Map<String, List<WordFrequency>> wordFrequencyMap = new HashMap<>();
-        for (WordFrequency wordFrequency : wordFrequencyList) {
-//       map.computeIfAbsent(input.getValue(), k -> new ArrayList<>()).add(input);
-            if (!wordFrequencyMap.containsKey(wordFrequency.getWord())) {
-                ArrayList wordList = new ArrayList<>();
-                wordList.add(wordFrequency);
-                wordFrequencyMap.put(wordFrequency.getWord(), wordList);
-            } else {
-                wordFrequencyMap.get(wordFrequency.getWord()).add(wordFrequency);
-            }
-        }
-        return wordFrequencyMap;
+        return wordFrequencyList.stream()
+                .collect(Collectors.groupingBy(WordFrequency::getWord, Collectors.toCollection(ArrayList::new)));
     }
 }
