@@ -16,7 +16,6 @@ public class WordFrequencyGame {
             try {
                 List<WordFrequency> wordFrequencyList = getWordFrequencies(inputStr);
 
-                //get the wordToWordFrequency for the next step of sizing the same word
                 Map<String, List<WordFrequency>> wordToWordFrequency = getListMap(wordFrequencyList);
 
                 List<WordFrequency> list = new ArrayList<>();
