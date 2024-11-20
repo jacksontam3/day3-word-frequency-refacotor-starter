@@ -14,15 +14,17 @@ public class WordFrequencyGame {
                     WorldFrequency worldFrequency = new WorldFrequency(word, 1);
                     worldFrequencyList.add(worldFrequency);
                 }
+
                 //get the map for the next step of sizing the same word
                 Map<String, List<WorldFrequency>> map = getListMap(worldFrequencyList);
+
                 List<WorldFrequency> list = new ArrayList<>();
                 for (Map.Entry<String, List<WorldFrequency>> entry : map.entrySet()) {
                     WorldFrequency worldFrequency = new WorldFrequency(entry.getKey(), entry.getValue().size());
                     list.add(worldFrequency);
                 }
                 worldFrequencyList = list;
-                worldFrequencyList.sort((w1, w2) -> w2.getWordCount() - w1.getWordCount());
+                worldFrequencyList.sort((word1, word2) -> word2.getWordCount() - word1.getWordCount());
                 StringJoiner joiner = new StringJoiner("\n");
                 for (WorldFrequency w : worldFrequencyList) {
                     String s = w.getWord() + " " + w.getWordCount();
