@@ -42,8 +42,7 @@ public class WordFrequencyGame {
     }
 
     private List<WordFrequency> calculateWordFrequencies(String inputStr) {
-        String[] words = inputStr.split(SPACE_REGEX);
-        return Arrays.stream(words)
+        return Arrays.stream(inputStr.split(SPACE_REGEX))
                 .map(word -> new WordFrequency(word, 1))
                 .toList();
     }
