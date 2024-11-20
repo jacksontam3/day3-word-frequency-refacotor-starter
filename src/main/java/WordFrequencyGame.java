@@ -16,14 +16,7 @@ public class WordFrequencyGame {
             try {
                 List<WordFrequency> wordFrequencyList = getWordFrequencies(inputStr);
 
-                Map<String, List<WordFrequency>> wordToWordFrequency = getListMap(wordFrequencyList);
-
-                List<WordFrequency> list = new ArrayList<>();
-                for (Map.Entry<String, List<WordFrequency>> entry : wordToWordFrequency.entrySet()) {
-                    WordFrequency wordFrequency = new WordFrequency(entry.getKey(), entry.getValue().size());
-                    list.add(wordFrequency);
-                }
-                wordFrequencyList = list;
+                wordFrequencyList = getWordFrequencyList(wordFrequencyList);
 
 
                 return getString(wordFrequencyList);
@@ -31,6 +24,18 @@ public class WordFrequencyGame {
                 return CALCULATE_ERROR + e.getMessage();
             }
         }
+    }
+
+    private List<WordFrequency> getWordFrequencyList(List<WordFrequency> wordFrequencyList) {
+        Map<String, List<WordFrequency>> wordToWordFrequency = getListMap(wordFrequencyList);
+
+        List<WordFrequency> list = new ArrayList<>();
+        for (Map.Entry<String, List<WordFrequency>> entry : wordToWordFrequency.entrySet()) {
+            WordFrequency wordFrequency = new WordFrequency(entry.getKey(), entry.getValue().size());
+            list.add(wordFrequency);
+        }
+        wordFrequencyList = list;
+        return wordFrequencyList;
     }
 
     private static String getString(List<WordFrequency> wordFrequencyList) {
