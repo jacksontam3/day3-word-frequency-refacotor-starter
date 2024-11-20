@@ -24,14 +24,20 @@ public class WordFrequencyGame {
                     list.add(wordFrequency);
                 }
                 wordFrequencyList = list;
-                wordFrequencyList.sort((word1, word2) -> word2.getWordCount() - word1.getWordCount());
-                StringJoiner joiner = new StringJoiner(LINE_BREAK);
-                wordFrequencyList.forEach(wordFrequency -> joiner.add(wordFrequency.getWord() + " " + wordFrequency.getWordCount()));
-                return joiner.toString();
+
+
+                return getString(wordFrequencyList);
             } catch (Exception e) {
                 return "Calculate Error";
             }
         }
+    }
+
+    private static String getString(List<WordFrequency> wordFrequencyList) {
+        wordFrequencyList.sort((word1, word2) -> word2.getWordCount() - word1.getWordCount());
+        StringJoiner joiner = new StringJoiner(LINE_BREAK);
+        wordFrequencyList.forEach(wordFrequency -> joiner.add(wordFrequency.getWord() + " " + wordFrequency.getWordCount()));
+        return joiner.toString();
     }
 
     private List<WordFrequency> getWordFrequencies(String inputStr) {
