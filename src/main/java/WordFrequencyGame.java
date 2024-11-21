@@ -27,11 +27,10 @@ public class WordFrequencyGame {
     }
 
     private List<WordFrequency> calculateAndAggregateWordFrequencies(String inputStr) {
-        Map<String, Long> wordCountMap = Arrays.stream(inputStr.split(SPACE_REGEX))
-                .collect(Collectors.groupingBy(word -> word, Collectors.counting()));
-
-        return wordCountMap.entrySet().stream()
-                .map(entry -> new WordFrequency(entry.getKey(), entry.getValue().intValue()))
+        return  Arrays.stream(inputStr.split(SPACE_REGEX))
+                .collect(Collectors.groupingBy(word -> word))
+                .entrySet().stream()
+                .map(entry -> new WordFrequency(entry.getKey(), entry.getValue().size()))
                 .toList();
     }
 
