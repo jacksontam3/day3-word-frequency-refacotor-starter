@@ -1,4 +1,6 @@
-import java.util.*;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class WordFrequencyGame {
@@ -27,7 +29,7 @@ public class WordFrequencyGame {
     }
 
     private List<WordFrequency> calculateAndAggregateWordFrequencies(String inputStr) {
-        return  Arrays.stream(inputStr.split(SPACE_REGEX))
+        return Arrays.stream(inputStr.split(SPACE_REGEX))
                 .collect(Collectors.groupingBy(word -> word))
                 .entrySet().stream()
                 .map(entry -> new WordFrequency(entry.getKey(), entry.getValue().size()))
